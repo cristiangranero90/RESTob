@@ -40,8 +40,14 @@ public class BookController {
     }
 
     @PostMapping("api/books")
-    public Book save(@RequestBody Book book){
-        return bookRepository.save(book);
+    public ResponseEntity<Book> save(@RequestBody Book book){
+        if (book.getId() != null){
+            log.warn("The book already exist. ");
+            return ResponseEntity.badRequest().build();
+        }
+        else{
+            return ResponseEntity.ok(bookRepository.save(book));
+        }
     }
 
     /**
@@ -50,8 +56,32 @@ public class BookController {
      * @return
      */
     @PutMapping("/api/books")
-    public Book update(@RequestBody Book book){
-        return bookRepository.save(book);
+    public ResponseEntity<Book> update(@RequestBody Book book){
+        if(book.getId() == null){
+            log.warn("Trying to update a non existent book.");
+            return ResponseEntity.badRequest().build();
+        }
+        else {
+            return ResponseEntity.ok(bookRepository.save(book));
+        }
+    }
+
+    @DeleteMapping("/api/books/{id}")
+    public ResponseEntity<Book> delete(@PathVariable Long id){
+        if(bookRepository.existsById(id)){
+            bookRepository.deleteById(id);
+            return ResponseEntity.noContent().build();
+        }
+        else{
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/api/books")
+    public ResponseEntity<Book> deleteAll(){
+        log.info("Deleing all the books in the data base");
+        bookRepository.deleteAll();
+        return ResponseEntity.noContent().build();
     }
 
 }
