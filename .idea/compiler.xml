@@ -9,9 +9,13 @@
         <module name="ob-rest-datajpa" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="RESTob" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="RESTob" options="-parameters" />
       <module name="ob-rest-datajpa" options="-parameters" />
     </option>
   </component>
