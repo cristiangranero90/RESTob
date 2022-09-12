@@ -79,7 +79,7 @@ public class BookController {
 
     @DeleteMapping("/api/books")
     public ResponseEntity<Book> deleteAll(){
-        log.info("Deleing all the books in the data base");
+        log.info("Deleting all the books in the data base");
         bookRepository.deleteAll();
         return ResponseEntity.noContent().build();
     }
