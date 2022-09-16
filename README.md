@@ -1,6 +1,7 @@
 ## Spring Boot
 
 Proyecto Spring Boot con dependencias:
+
 * H2
 * Spring Data JPA
 * Spring WEB
